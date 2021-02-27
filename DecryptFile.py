@@ -2,10 +2,10 @@ from cryptography.fernet import Fernet
 
 key = # Add your key
 
-system_information_e = 'e_system.txt'
-clipboard_information_e = 'e_clipboard.txt'
-keys_information_e = 'e_keys_logged.txt'
-
+# files to decrypt
+system_information_e = 
+clipboard_information_e =
+keys_information_e = 
 
 
 encrypted_files = [system_information_e, clipboard_information_e, keys_information_e]
